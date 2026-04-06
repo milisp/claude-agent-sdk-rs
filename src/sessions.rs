@@ -205,7 +205,13 @@ fn extract_last_json_string_field(text: &str, key: &str) -> Option<String> {
                         }
                         i += 1;
                     }
-                    search_from = value_start + 1;
+                    // Advance by the byte length of the first char at value_start
+                    // to avoid splitting a multibyte UTF-8 character.
+                    let step = text[value_start..]
+                        .chars()
+                        .next()
+                        .map_or(1, |c| c.len_utf8());
+                    search_from = value_start + step;
                     if search_from >= text.len() {
                         break;
                     }
