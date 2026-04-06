@@ -237,6 +237,8 @@ pub mod client;
 pub mod errors;
 mod internal;
 pub mod query;
+pub mod session_mutations;
+pub mod sessions;
 #[cfg(feature = "testing")]
 pub mod testing;
 pub mod types;
@@ -244,6 +246,7 @@ pub mod version;
 
 // Re-export commonly used types
 pub use errors::{ClaudeError, ImageValidationError, Result};
+pub use types::sessions::{ForkSessionResult, SdkSessionInfo, SessionMessage, SessionMessageType};
 pub use types::{
     config::*,
     efficiency::{EfficiencyConfig, ExecutionMetrics, MetricsSummary},
